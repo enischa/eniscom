@@ -1,0 +1,89 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title entry-hint-parent">
+      {{ .Title }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_meta.html" . -}}
+      {{- partial "translation_list.html" . -}}
+      {{- partial "edit_post.html" . -}}
+      {{- partial "post_canonical.html" . -}}
+    </div>
+    {{- end }}
+  </header>
+
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+
+  <div class="post-cover-flex">
+    <div class="post-cover-flex-image">
+      {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+    </div>
+    <div class="post-cover-flex-content">
+      {{- if .Content }}
+{{- $contentStr := .Content | string }}
+{{- $parts := split $contentStr "<iframe" }}
+{{- if $parts }}
+  {{- index $parts 0 | safeHTML }}
+{{- end }}
+{{- $embed := findRE "(?s)<iframe.*?</iframe>(\\s*<div.*?</div>)?" $contentStr 1 }}
+{{- if $embed }}
+  {{- index $embed 0 | safeHTML }}
+{{- end }}
+      {{- end }}
+    </div>
+  </div>
+
+  {{- if (.Param "ShowToc") }}
+  {{- partial "toc.html" . }}
+  {{- end }}
+
+{{- if .Content }}
+{{- $contentStr2 := .Content | string }}
+{{- $rest := findRE "(?s)</div>.*$" $contentStr2 1 }}
+{{- if not $rest }}
+  {{- $rest = findRE "(?s)</iframe>.*$" $contentStr2 1 }}
+{{- end }}
+  <div class="post-content md-content">
+    {{- if $rest }}
+      {{- $afterEmbed := index $rest 0 }}
+      {{- $afterEmbed = replaceRE "^</div>" "" $afterEmbed }}
+      {{- $afterEmbed = replaceRE "^</iframe>" "" $afterEmbed }}
+      {{- if not (.Param "disableAnchoredHeadings") }}
+        {{- partial "anchored_headings.html" $afterEmbed -}}
+      {{- else }}{{ $afterEmbed | safeHTML }}{{ end }}
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- partial "extend_post_content.html" . }}
+
+  <footer class="post-footer">
+    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms $tags) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+
+  {{- if (.Param "comments") }}
+  {{- partial "comments.html" . }}
+  {{- end }}
+</article>
+
+{{- end }}{{/* end main */}}

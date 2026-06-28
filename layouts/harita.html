@@ -1,0 +1,67 @@
+{{- define "main" }}
+<article class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+  </header>
+
+  <div id="harita-container" style="width: 100%; height: 600px; min-height: 600px; border-radius: 8px; margin-top: 20px;"></div>
+</article>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    if (typeof L === "undefined") {
+      console.error("Leaflet yüklenemedi!");
+      return;
+    }
+
+    var map = L.map('harita-container').setView([39.0, 35.0], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap katkıda bulunanlar'
+    }).addTo(map);
+
+    var posts = [
+      {{- range $index, $page := (where site.RegularPages "Type" "posts") }}
+      {{- if $page.Params.coordinates }}
+      {{- if $index }},{{ end }}
+      {{- $coords := split $page.Params.coordinates "," }}
+      {
+        lat: {{ index $coords 0 | strings.TrimSpace }},
+        lng: {{ index $coords 1 | strings.TrimSpace }},
+        title: "{{ $page.Title | htmlEscape }}",
+        url: "{{ $page.Permalink }}"{{ if $page.Resources.GetMatch "cover*" }},
+        image: "{{ ($page.Resources.GetMatch "cover*").Permalink }}"
+        {{- else }},
+        image: ""
+        {{- end }}
+      }
+      {{- end }}
+      {{- end }}
+    ];
+
+    posts.forEach(function (post) {
+      var popupContent = '<div style="max-width: 200px;">';
+      if (post.image) {
+        popupContent += '<img src="' + post.image + '" style="width:100%; border-radius:4px; margin-bottom:8px;">';
+      }
+      popupContent += '<strong>' + post.title + '</strong><br>';
+      popupContent += '<a href="' + post.url + '">Postu Gör →</a>';
+      popupContent += '</div>';
+
+      L.marker([post.lat, post.lng]).addTo(map).bindPopup(popupContent);
+    });
+
+    if (posts.length > 0) {
+      var bounds = posts.map(function (post) {
+        return [post.lat, post.lng];
+      });
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 8 });
+    }
+
+    setTimeout(function () {
+      map.invalidateSize();
+    }, 100);
+  });
+</script>
+{{- end }}

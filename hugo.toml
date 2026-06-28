@@ -1,0 +1,53 @@
+baseURL = 'https://eniscakar.com/'
+locale = 'tr-TR'
+title = 'Enis Çakar - Saha Ses Kayıtları'
+theme = "PaperMod"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  defaultTheme = "light"
+  disableThemeToggle = true
+  ShowReadingTime = true
+  fuseOpts.isCaseSensitive = false
+  fuseOpts.shouldSort = true
+  fuseOpts.location = 0
+  fuseOpts.distance = 1000
+  fuseOpts.threshold = 0.4
+  fuseOpts.minMatchCharLength = 2
+  fuseOpts.keys = ["title", "permalink", "summary", "content"]
+ pluralizeListTitles = false
+
+[[menu.main]]
+ identifier = "hakkimda"
+ name = "Hakkımda"
+ url = "/hakkimda"
+ weight = 15
+[[menu.main]]
+  identifier = "harita"
+  name = "Harita"
+  url = "/harita/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "search"
+  name = "Ara"
+  url = "/search/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "species"
+  name = "Türler"
+  url = "/species/"
+  weight = 25
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  species = "species"

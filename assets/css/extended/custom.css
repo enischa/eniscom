@@ -1,0 +1,96 @@
+:root {
+    --main-width: 1200px;
+}
+
+/* Detay sayfası: cover solda, içerik sağda */
+.post-cover-flex {
+    display: flex;
+    gap: 32px;
+    margin: 20px 0;
+}
+.post-cover-flex-image {
+    flex: 0 0 40%;
+    max-width: 40%;
+}
+.post-cover-flex-image figure.entry-cover {
+    margin: 0;
+}
+.post-cover-flex-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+.post-cover-flex-content {
+    flex: 0 0 55%;
+    max-width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.post-cover-flex-content p,
+.post-cover-flex-content iframe,
+.post-cover-flex-content div {
+    max-width: 100%;
+    white-space: normal;
+}
+
+/* Ana sayfa kartları: aynı yan yana düzen */
+.post-entry-flex {
+    display: flex;
+    gap: 24px;
+}
+.post-entry-flex-image {
+    flex: 0 0 40%;
+    max-width: 40%;
+}
+.post-entry-flex-image figure.entry-cover {
+    margin: 0;
+}
+.post-entry-flex-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+.post-entry-flex-content {
+    flex: 0 0 55%;
+    max-width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.entry-embed iframe {
+    width: 100%;
+
+}
+
+.post-entry-flex-content .entry-content {
+    font-size: 18px;
+}
+
+/* Mobilde dikey düzene dönsün */
+
+@media (max-width: 768px) {
+    .post-cover-flex,
+    .post-entry-flex {
+        flex-direction: column;
+    }
+    .post-cover-flex-image,
+    .post-entry-flex-image {
+        flex: 1 1 auto;
+        max-width: 100%;
+    }
+}
+
+.entry-embed {
+    margin-top: 16px;
+}
+
+.post-cover-flex-content iframe {
+    margin-top: 16px;
+}
+
+.tag-entry .entry-cover {
+    display: block !important;
+}
