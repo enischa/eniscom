@@ -12,7 +12,7 @@ categories: [saha kayıtları]
 
 # Saha kaydı bilgileri
 habitat: "Yüksek dağ çayırları, sarp kayalıklar"
-species: [Ardıç, karaçam, geven]
+species: [kerkenez, kınalı keklik, kaya çintesi, kızılkuyruk, kırmızı gagalı dağ kargası, ardıç, karaçam, geven]
 record_date: 2025-04-28
 coordinates: "37.784634, 35.058182"
 location: "Çamardı-Niğde"
@@ -42,7 +42,7 @@ Kanyonun 800 metre ötesinde öten bir puhu(kartal baykuşu), avına bu tehlikey
 ## Habitat ve Tür Bilgisi
 
 - **Habitat:** Yüksek dağ çayırları, sarp kayalıklar
-- **Türler:** Ardıç, karaçam, geven ve dahası
+- **Türler:** kerkenez, kınalı keklik, kaya çintesi, kızılkuyruk, kırmızı gagalı dağ kargası, ardıç, karaçam, geven
 - **Tarih:** 28 Nisan 2025
 - **Koordinat:** 37.784634, 35.058182
 - **Konum:** Çamardı-Niğde
