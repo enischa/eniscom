@@ -15,10 +15,12 @@ Merhaba, ben Enis Çakar.
 
 ## İletişim
 
+- E-posta: [info@eniscakar.com]
+
+## Linkler
+
 - <a href="https://soundcloud.com/eniscakar" target="_blank" rel="noopener">Soundcloud</a>
 
 - <a href="https://www.inaturalist.org/people/8910534" target="_blank" rel="noopener">iNaturalist</a>
 
 - <a href="https://www.instagram.com/enischakar/" target="_blank" rel="noopener">Instagram</a>
-
-- E-posta: [info@eniscakar.com]
