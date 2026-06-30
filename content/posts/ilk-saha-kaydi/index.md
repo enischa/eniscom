@@ -53,7 +53,3 @@ olarak sergiliyor. Her bir dal, her bir yaprak, yaşama tutunmanın birer hatır
 - **Tarih:** 31 Temmuz 2025
 - **Koordinat:** 39.487312, 26.241065
 - **Konum:** Behram-Assos
-
-## Tür Fotoğrafları
-
-![Tür fotoğrafı](img/species1.jpg)
