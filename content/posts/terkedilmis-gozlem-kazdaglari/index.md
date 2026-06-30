@@ -29,7 +29,9 @@ location: "Edremit-Balıkesir"
 
 | | | |
 |---|---|---|
-| ![Fotoğraf 1](img/photo1.jpg) | ![Fotoğraf 2](img/photo2.jpg) | ![Fotoğraf 3](img/photo3.jpg) | ![Fotoğraf 4](img/photo4.jpg) | ![Fotoğraf 5](img/photo5.jpg) | ![Fotoğraf 6](img/photo6.jpg) |
+| ![Fotoğraf 1](img/photo1.jpg) | ![Fotoğraf 2](img/photo2.jpg) | ![Fotoğraf 3](img/photo3.jpg) 
+|---|---|---|
+| ![Fotoğraf 4](img/photo4.jpg) | ![Fotoğraf 5](img/photo5.jpg) | ![Fotoğraf 6](img/photo6.jpg) |
 
 ## Habitat ve Tür Bilgisi
 
