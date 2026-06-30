@@ -1,0 +1,27 @@
+{{- $scratch := newScratch }}
+
+{{- /* Kayıt tarihi (record_date) varsa onu göster, yoksa normal date'e dön */ -}}
+{{- $displayDate := .Date }}
+{{- with .Params.record_date }}
+    {{- $displayDate = (time.AsTime .) }}
+{{- end }}
+
+{{- if not $displayDate.IsZero -}}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" ($displayDate) ($displayDate | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+    {{- with (partial "author.html" .) }}
+        {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
+    {{- end }}
+{{- end }}
+
+{{/* Combine all meta information into a single string with separators and render it as HTML.*/}}
+
+{{- with ($scratch.Get "meta") }}
+    {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}
