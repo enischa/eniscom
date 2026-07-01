@@ -94,3 +94,10 @@
 .tag-entry .entry-cover {
     display: block !important;
 }
+
+.normal-page-cover img {
+    max-width: 400px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}

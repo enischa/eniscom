@@ -22,22 +22,23 @@
   </header>
 
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+  {{- $contentStr := .Content | string }}
+  {{- $hasEmbed := findRE "(?s)<iframe.*?</iframe>" $contentStr 1 }}
 
+  {{- if $hasEmbed }}
+  {{- /* SAHA KAYDI DÜZENİ: iframe varsa cover solda, ön metin + embed sağda */ -}}
   <div class="post-cover-flex">
     <div class="post-cover-flex-image">
       {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
     </div>
     <div class="post-cover-flex-content">
-      {{- if .Content }}
-{{- $contentStr := .Content | string }}
-{{- $parts := split $contentStr "<iframe" }}
-{{- if $parts }}
-  {{- index $parts 0 | safeHTML }}
-{{- end }}
-{{- $embed := findRE "(?s)<iframe.*?</iframe>(\\s*<div.*?</div>)?" $contentStr 1 }}
-{{- if $embed }}
-  {{- index $embed 0 | safeHTML }}
-{{- end }}
+      {{- $parts := split $contentStr "<iframe" }}
+      {{- if $parts }}
+        {{- index $parts 0 | safeHTML }}
+      {{- end }}
+      {{- $embed := findRE "(?s)<iframe.*?</iframe>(\\s*<div.*?</div>)?" $contentStr 1 }}
+      {{- if $embed }}
+        {{- index $embed 0 | safeHTML }}
       {{- end }}
     </div>
   </div>
@@ -46,12 +47,10 @@
   {{- partial "toc.html" . }}
   {{- end }}
 
-{{- if .Content }}
-{{- $contentStr2 := .Content | string }}
-{{- $rest := findRE "(?s)</div>.*$" $contentStr2 1 }}
-{{- if not $rest }}
-  {{- $rest = findRE "(?s)</iframe>.*$" $contentStr2 1 }}
-{{- end }}
+  {{- $rest := findRE "(?s)</div>.*$" $contentStr 1 }}
+  {{- if not $rest }}
+    {{- $rest = findRE "(?s)</iframe>.*$" $contentStr 1 }}
+  {{- end }}
   <div class="post-content md-content">
     {{- if $rest }}
       {{- $afterEmbed := index $rest 0 }}
@@ -62,6 +61,24 @@
       {{- else }}{{ $afterEmbed | safeHTML }}{{ end }}
     {{- end }}
   </div>
+
+  {{- else }}
+  {{- /* NORMAL SAYFA DÜZENİ: iframe yoksa (Hakkımda vb.) standart tek parça render */ -}}
+  <div class="normal-page-cover">
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+  </div>
+
+  {{- if (.Param "ShowToc") }}
+  {{- partial "toc.html" . }}
+  {{- end }}
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+      {{- partial "anchored_headings.html" .Content -}}
+    {{- else }}{{ .Content }}{{ end }}
+  </div>
+  {{- end }}
   {{- end }}
 
   {{- partial "extend_post_content.html" . }}
