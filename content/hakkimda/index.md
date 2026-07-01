@@ -5,26 +5,29 @@ title = 'Hakkımda'
 +++
 
 ![Profil Fotoğrafı](profil.jpg)
-<br>
+<div style="height: 12px;"></div>
+
 
 Merhaba, ben Enis Çakar. 
-<br>
 [Buraya detaylı bir biyografi yazacağım. :)]
-<br>
-<br>
+<div style="height: 24px;"></div>
+
 
 ## İletişim
+<div style="height: 12px;"></div>
 
-<br>
 E-posta: [info@eniscakar.com]
-<br>
-<br>
+
+<div style="height: 24px;"></div>
 
 ## Linkler
+<div style="height: 12px;"></div>
 
-<br>
+
 <a href="https://soundcloud.com/eniscakar" target="_blank" rel="noopener">Soundcloud</a>
 
 <a href="https://www.inaturalist.org/people/8910534" target="_blank" rel="noopener">iNaturalist</a>
+
+<a href="https://mastodon.social/@eniscakar" target="_blank" rel="noopener">Mastodon</a>
 
 <a href="https://www.instagram.com/enischakar/" target="_blank" rel="noopener">Instagram</a>
